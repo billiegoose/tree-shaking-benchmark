@@ -70,11 +70,11 @@ fs.emptyDirSync('dist')
 fs.writeFileSync(`${__dirname}/webpack.config.js`,
 `
 const path = require('path')
-module.exports = [
+module.exports = [${mapExports(ex => `
   {
     target: 'web',
-    entry: {${mapExports(ex => `
-      ${ex}: './src/${ex}.js',`)}
+    entry: {
+      ${ex}: './src/${ex}.js'
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -82,7 +82,7 @@ module.exports = [
     },
     mode: 'production',
     devtool: false,
-  }
+  },`)}
 ]
 `
 )
